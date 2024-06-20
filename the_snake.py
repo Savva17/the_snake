@@ -45,7 +45,7 @@ class GameObject:
     Главный класс
     """
     def __init__(self):
-        self.position = (0,0)
+        self.position = ((SCREEN_WIDTH // 2), (SCREEN_HEIGHT // 2))
         self.body_color = BOARD_BACKGROUND_COLOR
 
     def draw(self):
@@ -113,7 +113,8 @@ def main():
     # Инициализация PyGame:
     pygame.init()
     # Тут нужно создать экземпляры классов.
-    ...
+    apple = Apple()
+
 
     # while True:
     #     clock.tick(SPEED)
