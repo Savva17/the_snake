@@ -42,7 +42,8 @@ clock = pygame.time.Clock()
 # Тут опишите все классы игры.
 class GameObject:
     """
-    Главный класс
+    Главный класс, ставим позицию по умолчанию
+    в центре игрового поля.
     """
 
     def __init__(self):
@@ -64,7 +65,7 @@ class Apple(GameObject):
         self.position = self.randomize_position()
         self.body_color = APPLE_COLOR
 
-    def randomize_position(self):
+    def randomize_position(self) -> tuple[int, int]:
         """
         Устанавливает случайное положение
         яблока.
@@ -85,22 +86,32 @@ class Snake(GameObject):
     Настройка характеристик 
     змейки.
     """
-
+    
     def __init__(self):
+        """
+        Атрибуты дочернего класса Snake.
+        """
         super().__init__()
         self.body_color = SNAKE_COLOR
+        self.length = 1
+        self.positions = [self.position]
+        self.direction = RIGHT
+        self.next_direction = None
+
 
     def update_direction(self):
-        pass
+        if self.next_direction:
+            self.direction = self.next_direction
+            self.next_direction = None
 
     def move(self):
-        pass
+        
 
     def draw(self):
         pass
-
+    
     def get_head_position(self):
-        pass
+        return self.positions[self.position]
 
     def reset(self):
         pass
