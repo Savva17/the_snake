@@ -97,6 +97,7 @@ class Snake(GameObject):
         self.positions = [self.position]
         self.direction = RIGHT
         self.next_direction = None
+        self.last = None
 
 
     def update_direction(self):
@@ -107,14 +108,25 @@ class Snake(GameObject):
     def move(self):
         
 
+
     def draw(self):
         pass
     
     def get_head_position(self):
-        return self.positions[self.position]
+        return self.positions[GameObject.position]
 
     def reset(self):
-        pass
+        """
+        Сброс змейки в начальное состояние.
+        """
+        print(f'Game Over.')
+        self.length = 1
+        self.positions = GameObject.position
+        direction = [UP, DOWN, LEFT, RIGHT]
+        self.direction = direction[randint(0,3)]
+        screen.fill(BOARD_BACKGROUND_COLOR)
+
+
 
 def handle_keys(game_object):
     for event in pygame.event.get():
