@@ -40,7 +40,73 @@ clock = pygame.time.Clock()
 
 
 # Тут опишите все классы игры.
-...
+class GameObject:
+    """
+    Главный класс
+    """
+    def __init__(self):
+        self.position = (0,0)
+        self.body_color = BOARD_BACKGROUND_COLOR
+
+    def draw(self):
+        pass
+
+
+class Apple(GameObject):
+    """
+    Описывает яблоко.
+    Генерируем координаты.
+    """
+    def __init__(self):
+        super().__init__(self)
+        self.position = self.randomize_position()
+        self.body_color = APPLE_COLOR
+
+    def randomize_position():
+        """
+        Устанавливает случайное положение
+        яблока.
+        """
+        return (
+            randint(0, GRID_WIDTH) * GRID_SIZE, 
+            randint(0, GRID_HEIGHT) * GRID_SIZE
+            )
+    
+    def draw(self):
+        rect = pygame.Rect(self.position, (GRID_SIZE, GRID_SIZE))
+        pygame.draw.rect(screen, self.body_color, rect)
+        pygame.draw.rect(screen, BORDER_COLOR, rect, 1)
+
+
+
+class Snake(GameObject):
+    """
+    Настройка характеристик 
+    змейки.
+    """
+    def __init__(self):
+        super().__init__(self)
+
+
+    def update_direction(self):
+        pass
+
+    def move(self):
+        pass
+
+
+
+    def draw(self):
+        pass
+
+
+    def get_head_position(self):
+        pass
+
+
+    def reset(self):
+
+
 
 
 def main():
