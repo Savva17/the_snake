@@ -59,7 +59,8 @@ class Apple(GameObject):
         super().__init__(body_color=APPLE_COLOR)
         self.position = self.randomize_position([])
 
-    def randomize_position(self, snake_positions: List[Tuple[int, int]]) -> Tuple[int, int]:
+    def randomize_position(self, snake_positions: List[Tuple[int, int]]
+                           ) -> Tuple[int, int]:
         """Устанавливает случайное положение яблока."""
         while True:
             position = (
