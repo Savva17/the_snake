@@ -49,7 +49,7 @@ class GameObject:
 
     def draw(self):
         """Абстрактный метод."""
-        pass
+        raise NameError
 
 
 class Apple(GameObject):
