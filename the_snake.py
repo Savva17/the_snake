@@ -40,7 +40,6 @@ pygame.display.set_caption('Змейка')
 clock = pygame.time.Clock()
 
 
-# Тут опишите все классы игры.
 class GameObject:
     """Главный класс, для игрового поля."""
 
@@ -65,10 +64,7 @@ class Apple(GameObject):
 
     def randomize_position(self, snake_positions: List[Tuple[int, int]]
                            ) -> Tuple[int, int]:
-        """
-        Устанавливает случайное положение
-        яблока.
-        """
+        """Устанавливает случайное положение яблока."""
         while True:
             position = (randint(0, GRID_WIDTH - 1) * GRID_SIZE,
                         randint(0, GRID_HEIGHT - 1) * GRID_SIZE,
@@ -127,7 +123,6 @@ class Snake(GameObject):
         head_rect = pygame.Rect(self.positions[0], (GRID_SIZE, GRID_SIZE))
         pygame.draw.rect(screen, self.body_color, head_rect)
         pygame.draw.rect(screen, BORDER_COLOR, head_rect, 1)
-
         # Затирание последнего сегмента
         if self.last:
             last_rect = pygame.Rect(self.last, (GRID_SIZE, GRID_SIZE))
