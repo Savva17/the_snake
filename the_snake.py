@@ -46,7 +46,6 @@ class GameObject:
     Главный класс, ставим позицию по умолчанию
     в центре игрового поля.
     """
-
     def __init__(self, position=None, body_color=None) -> None:
         self.position = (position if position is not None else (
             SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2))
@@ -62,7 +61,6 @@ class Apple(GameObject):
     Описывает яблоко.
     Генерируем координаты.
     """
-
     def __init__(self):
         super().__init__(body_color=APPLE_COLOR)
         self.position = self.randomize_position([])
@@ -89,7 +87,6 @@ class Apple(GameObject):
 
 class Snake(GameObject):
     """Настройка характеристик змейки."""
-
     def __init__(self):
         """Атрибуты дочернего класса Snake."""
         super().__init__(body_color=SNAKE_COLOR)
