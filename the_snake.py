@@ -43,7 +43,7 @@ class GameObject:
     """Главный класс, для игрового поля."""
 
     def __init__(self, position=None, body_color=None) -> None:
-        """Инициализация игрового обЪекта"""
+        """Инициализация игрового обЪекта."""
         self.position = (position if position is not None else (
             SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2))
         self.body_color = body_color
@@ -65,9 +65,10 @@ class Apple(GameObject):
                            ) -> Tuple[int, int]:
         """Устанавливает случайное положение яблока."""
         while True:
-            position = (randint(0, GRID_WIDTH - 1) * GRID_SIZE,
-                        randint(0, GRID_HEIGHT - 1) * GRID_SIZE,
-                        )
+            position = (
+                randint(0, GRID_WIDTH - 1) * GRID_SIZE,
+                randint(0, GRID_HEIGHT - 1) * GRID_SIZE,
+            )
             if position not in snake_positions:
                 return position
 
@@ -100,11 +101,12 @@ class Snake(GameObject):
         """Описывает движение змейки"""
         head_position = self.get_head_position()
         x, y = self.direction
-        new_position = ((head_position[0] + (x * GRID_SIZE))
-                        % SCREEN_WIDTH,
-                        (head_position[1] + (y * GRID_SIZE))
-                        % SCREEN_HEIGHT,
-                        )
+        new_position = (
+            (head_position[0] + (x * GRID_SIZE)) %
+            SCREEN_WIDTH,
+            (head_position[1] + (y * GRID_SIZE)) %
+            SCREEN_HEIGHT,
+        )
         if len(self.positions) > 2 and new_position in self.positions[2:]:
             self.reset()
         else:
@@ -122,6 +124,7 @@ class Snake(GameObject):
         head_rect = pygame.Rect(self.positions[0], (GRID_SIZE, GRID_SIZE))
         pygame.draw.rect(screen, self.body_color, head_rect)
         pygame.draw.rect(screen, BORDER_COLOR, head_rect, 1)
+
         # Затирание последнего сегмента
         if self.last:
             last_rect = pygame.Rect(self.last, (GRID_SIZE, GRID_SIZE))
@@ -172,6 +175,7 @@ def main():
         snake.update_direction()
         snake.move()
         snake.draw()
+
         if snake.get_head_position() == apple.position:
             apple.position = apple.randomize_position(snake.positions)
             snake.length += 1
