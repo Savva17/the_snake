@@ -87,6 +87,7 @@ class Apple(GameObject):
 
 class Snake(GameObject):
     """Настройка характеристик змейки."""
+    
     def __init__(self):
         """Атрибуты дочернего класса Snake."""
         super().__init__(body_color=SNAKE_COLOR)
