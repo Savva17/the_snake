@@ -49,7 +49,7 @@ class GameObject:
 
     def draw(self):
         """Абстрактный метод."""
-        raise NameError
+        raise NotImplementedError
 
 
 class Apple(GameObject):
