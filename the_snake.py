@@ -2,7 +2,6 @@ import pygame
 from random import randint
 from typing import Tuple, List
 
-
 # Константы для размеров поля и сетки:
 SCREEN_WIDTH, SCREEN_HEIGHT = 640, 480
 GRID_SIZE = 20
@@ -39,15 +38,12 @@ pygame.display.set_caption('Змейка')
 # Настройка времени:
 clock = pygame.time.Clock()
 
-
 # Тут опишите все классы игры.
 class GameObject:
-    """
-    Главный класс, ставим позицию по умолчанию
-    в центре игрового поля.
-    """
+    """Главный класс, для игрового поля."""
 
     def __init__(self, position=None, body_color=None) -> None:
+        """Инициализация игрового обЪекта"""
         self.position = (position if position is not None else (
             SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2))
         self.body_color = body_color
@@ -58,12 +54,10 @@ class GameObject:
 
 
 class Apple(GameObject):
-    """
-    Описывает яблоко.
-    Генерируем координаты.
-    """
+    """Класс описывает яблоко."""
 
     def __init__(self):
+        """Инициализация яблока, случайное значение и цвет."""
         super().__init__(body_color=APPLE_COLOR)
         self.position = self.randomize_position([])
 
