@@ -43,8 +43,7 @@ class GameObject:
     """Главный класс, ставим позицию по умолчанию в центре игрового поля."""
 
     def __init__(self, position=None, body_color=None) -> None:
-        self.position = (position if position is not None else (
-            SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2))
+        self.position = position or (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
         self.body_color = body_color
 
     def draw(self):
@@ -93,17 +92,17 @@ class Snake(GameObject):
 
     def move(self):
         """Описывает движение змейки."""
-        head_position = self.get_head_position()
-        self.positions.insert(
-            0, (((head_position[0] + self.direction[0] * GRID_SIZE))
-                % SCREEN_WIDTH,
-                ((head_position[1] + self.direction[1]
-                  * GRID_SIZE)) % SCREEN_HEIGHT
-                ))
-        if len(self.positions) > self.length:
-            self.last = self.positions.pop()
+        head_x, head_y = self.get_head_position()
+        dir_x, dir_y = self.direction
+        new_position = ((head_x + (dir_x * GRID_SIZE)) % SCREEN_WIDTH,
+                        (head_y + (dir_y * GRID_SIZE)) % SCREEN_HEIGHT
+                        )
+        if len(self.positions) > 2 and new_position in self.positions[2:]:
+            self.reset()
         else:
-            self.last = None
+            self.positions.insert(0, new_position)
+            if len(self.positions) > self.length:
+                self.last = self.positions.pop()
 
     def draw(self):
         """Окрашивает змейку."""
