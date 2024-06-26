@@ -43,13 +43,13 @@ class GameObject:
     """Главный класс, ставим позицию по умолчанию в центре игрового поля."""
 
     def __init__(self, position=None, body_color=None) -> None:
-        self.position = position if position is not None else (
-            SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
+        self.position = (position if position is not None else (
+            SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2))
         self.body_color = body_color
 
     def draw(self):
         """Абстрактный метод."""
-        pass
+        raise NotImplementedError
 
 
 class Apple(GameObject):
@@ -94,17 +94,16 @@ class Snake(GameObject):
     def move(self):
         """Описывает движение змейки."""
         head_position = self.get_head_position()
-        x, y = self.direction
-        new_position = (
-            (head_position[0] + (x * GRID_SIZE)) % SCREEN_WIDTH,
-            (head_position[1] + (y * GRID_SIZE)) % SCREEN_HEIGHT
-        )
-        if len(self.positions) > 2 and new_position in self.positions[2:]:
-            self.reset()
+        self.positions.insert(
+            0, (((head_position[0] + self.direction[0] * GRID_SIZE))
+                % SCREEN_WIDTH,
+                ((head_position[1] + self.direction[1]
+                  * GRID_SIZE)) % SCREEN_HEIGHT
+                ))
+        if len(self.positions) > self.length:
+            self.last = self.positions.pop()
         else:
-            self.positions.insert(0, new_position)
-            if len(self.positions) > self.length:
-                self.last = self.positions.pop()
+            self.last = None
 
     def draw(self):
         """Окрашивает змейку."""
@@ -128,7 +127,6 @@ class Snake(GameObject):
 
     def reset(self):
         """Сброс змейки в начальное состояние."""
-        print('Game Over.')
         self.length = 1
         self.positions = [self.position]
         self.direction = RIGHT
